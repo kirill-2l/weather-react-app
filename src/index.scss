@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+  list-style: none;
+}
+html {
+  height: 100%;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1;
+  font-family: 'Open Sans', sans-serif, arial;
+  min-height: 100%;
+}
+
+#root {
+  height: 100vh;
+}
+
+// ! colors //
+
+$blue: #6277BF;
+$orange: #E25F00;
+
+.weather-app {
+  display: flex;
+  height: 100%;
+
+  &__sidebar {
+    width: 400px;
+    background-color: #FFF4E9;
+    box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.02);
+    padding: 30px;
+  }
+}
+
+
+
+
+@import './components/Logo/logo';
+@import './components/CitiesList/CitiesList';
+@import './components/AddBtn/AddBtn';
+@import './components/City/City';

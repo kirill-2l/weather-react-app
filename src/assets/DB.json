@@ -1,0 +1,34 @@
+{
+  "cities": [
+    {
+      "id": 1,
+      "name": "Cairns",
+      "timezone": 36000,
+      "windSpeed": 1.5,
+      "temp": 298.46,
+      "feelsLike": 32,
+      "sunrise": 1579982485,
+      "sunset": 1580029006
+    },
+    {
+      "id": 2,
+      "name": "Moscow",
+      "timezone": 36000,
+      "windSpeed": 1.5,
+      "temp": 298.46,
+      "feelsLike": 32,
+      "sunrise": 1579982485,
+      "sunset": 1580029006
+    },
+    {
+      "id": 3,
+      "name": "Novosibirsk",
+      "timezone": 36000,
+      "windSpeed": 1.5,
+      "temp": 298.46,
+      "feelsLike": 32,
+      "sunrise": 1579982485,
+      "sunset": 1580029006
+    }
+  ]
+}
