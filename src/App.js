@@ -28,24 +28,26 @@ function App() {
     });
   }, []);
 
-  // const getCities = () => {
-  //   const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
-  //   axios
-  //     .get(
-  //       `https://api.openweathermap.org/data/2.5/weather?id=2172797&appid=${apiKey}`
-  //     )
-  //     .then(({ data }) => {
-  //       setList({
-  //         name: data.name,
-  //         timezone: data.timezone,
-  //         windSpeed: data.wind.speed,
-  //         temp: data.main.temp,
-  //         feelsLike: data.main.feels_like,
-  //         sunrise: data.sys.sunrise,
-  //         sunset: data.sys.sunset
-  //       });
-  //     });
-  // };
+  const getCity = (cityId) => {
+    const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?id=2172797&appid=${apiKey}`
+      )
+      .then(({ data }) => {
+        const newItem = ({
+          name: data.name,
+          timezone: data.timezone,
+          windSpeed: data.wind.speed,
+          temp: data.main.temp,
+          feelsLike: data.main.feels_like,
+          sunrise: data.sys.sunrise,
+          sunset: data.sys.sunset
+        })
+        const newList = [...list, newItem];
+        console.log(newList);
+      });
+  };
 
   return (
     <div className="weather-app">
@@ -69,7 +71,7 @@ function App() {
       </div>
         <div className="weather-app__main city">
         <Route exact path="/">
-          <AddCity />
+          <AddCity getCity={getCity}/>
         </Route>
       <Route path="/city/">
           {cities && <City cities={cities} />}
