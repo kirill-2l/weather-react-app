@@ -6,9 +6,10 @@
       "timezone": 36000,
       "windSpeed": 1.5,
       "temp": 298.46,
-      "feelsLike": 32,
+      "feelsLike": 300,
       "sunrise": 1579982485,
-      "sunset": 1580029006
+      "sunset": 1580029006,
+      "listId": 1
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "temp": 298.46,
       "feelsLike": 32,
       "sunrise": 1579982485,
-      "sunset": 1580029006
+      "sunset": 1580029006,
+      "listId": 2
     },
     {
       "id": 3,
@@ -28,7 +30,22 @@
       "temp": 298.46,
       "feelsLike": 32,
       "sunrise": 1579982485,
-      "sunset": 1580029006
+      "sunset": 1580029006,
+      "listId": 3
+    }
+  ],
+  "list": [
+    {
+      "id": 1,
+      "name": "Cairns"
+    },
+    {
+      "id": 2,
+      "name": "Moscow"
+    },
+    {
+      "id": 3,
+      "name": "Novosibirsk"
     }
   ]
 }

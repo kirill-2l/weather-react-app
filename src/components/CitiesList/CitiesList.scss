@@ -8,11 +8,10 @@
     margin-bottom: 50px;
   }
   &__item {
-    color: $blue;
     padding-left: 25px;
     position: relative;
+    color: $blue;
     font-size: 28px;
-    color: #000;
     cursor: pointer;
     transition: all linear 0.3s;
     &:not(:last-child) {

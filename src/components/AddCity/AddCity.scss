@@ -1,0 +1,36 @@
+.add-city {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  &__wrapper {
+    width: 60%;
+  }
+  &__select {
+    width: 100%;
+  }
+  &__btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 100;
+    background-color: $blue;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    align-self: flex-start;
+  }
+  &__title {
+    font-size: 28px;
+    color: $blue;
+    margin-bottom: 25px;
+    font-weight: 100;
+  }
+}
+
+.input {
+  border-radius: 5px;
+  border: 2px solid $blue;
+  padding: 10px 15px;
+}

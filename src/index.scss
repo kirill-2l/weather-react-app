@@ -5,6 +5,7 @@
   box-sizing: border-box;
   border: none;
   list-style: none;
+  text-decoration: none;
 }
 html {
   height: 100%;
@@ -13,7 +14,7 @@ html {
 body {
   font-size: 16px;
   line-height: 1;
-  font-family: 'Open Sans', sans-serif, arial;
+  font-family: "Open Sans", sans-serif, arial;
   min-height: 100%;
 }
 
@@ -23,8 +24,8 @@ body {
 
 // ! colors //
 
-$blue: #6277BF;
-$orange: #E25F00;
+$blue: #6277bf;
+$orange: #e25f00;
 
 .weather-app {
   display: flex;
@@ -32,16 +33,14 @@ $orange: #E25F00;
 
   &__sidebar {
     width: 400px;
-    background-color: #FFF4E9;
+    background-color: #fff4e9;
     box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.02);
     padding: 30px;
   }
 }
 
-
-
-
-@import './components/Logo/logo';
-@import './components/CitiesList/CitiesList';
-@import './components/AddBtn/AddBtn';
-@import './components/City/City';
+@import "./components/Logo/logo";
+@import "./components/CitiesList/CitiesList";
+@import "./components/AddBtn/AddBtn";
+@import "./components/City/City";
+@import "./components/AddCity/AddCity";

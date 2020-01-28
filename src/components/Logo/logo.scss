@@ -1,7 +1,9 @@
 .logo {
-  font-size: 36px;
-  font-weight: 800;
-  color: #000;
+  a {
+    font-size: 36px;
+    font-weight: 800;
+    color: #000;
+  }
   &__first-letter {
     color: $blue;
   }
