@@ -1,51 +1,84 @@
-import React, { useState, useEffect } from "react";
-import Select from "react-select";
-import { FixedSizeList as List } from "react-window";
+import React, { useState } from "react";
+import Autosuggest from "react-autosuggest";
+
 import DB from "../../assets/city.list.min.json";
-import Autosuggest from 'react-autosuggest';
 
 const AddCity = ({ getCity }) => {
-  const [selectId, setSelectId] = useState(null);
-  const [selectCountry, setSelectCountry] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  const [value, setValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
-  const countries = [...new Set(DB.map(item => item.country))].map(item => {
+  const cities = DB.map(item => {
     return {
-      value: item,
-      label: item
+      name: item.name,
+      countryId: item.id,
+      country: item.country
     };
   });
-  const cities = selectCountry
-    ? DB.filter(({ country }) => country === selectCountry).map(item => {
-        return {
-          value: item.name,
-          label: item.name,
-          id: item.id
-        };
-      })
-    : null;
+
+  const getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0
+      ? []
+      : cities.filter(
+          city => city.name.toLowerCase().slice(0, inputLength) === inputValue
+        );
+  };
+
+  const getSuggestionValue = suggestion => suggestion.name;
+
+  const renderSuggestion = suggestion => {
+    return (
+      <div className="react-autosuggest__suggestion-item">
+        <div className="react-autosuggest__suggestion-name">{suggestion.name}</div>
+        <div className="react-autosuggest__suggestion-country">{suggestion.country}</div>
+      </div>
+    );
+  };
+
+  const handleChange = (event, { newValue }) => {
+    setValue(newValue);
+  };
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const shouldRenderSuggestions = value => {
+    return value.trim().length > 2;
+  };
+  const onSuggestionSelected = (event, { suggestion }) => {
+    setSelectedId(suggestion.countryId);
+  };
+  const inputProps = {
+    placeholder: "Type a city name",
+    value,
+    onChange: handleChange
+  };
+
   return (
     <div className="add-city">
       <div className="add-city__wrapper">
         <h3 className="add-city__title">Add new City to List</h3>
-        <h4>Country</h4>
-        <Select
-          isSearchable
-          isClearable
-          onChange={e => (e ? setSelectCountry(e.value) : null)}
-          className={"add-city__select"}
-          options={countries}
-        ></Select>
-        {selectCountry && (
-          <div>
-            <h4>City</h4>
-            <Select
-            onChange={e => (e ? setSelectId(e.id) : null)}
-            isSearchable isClearable options={cities} />
-          </div>
-        )}
-
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+          shouldRenderSuggestions={shouldRenderSuggestions}
+          highlightFirstSuggestion={true}
+          onSuggestionSelected={onSuggestionSelected}
+        />
         <button
-          onClick={() => (selectId ? getCity(selectId) : false)}
+          onClick={() => (selectedId ? getCity(selectedId) : false)}
           className="add-city__btn"
         >
           Add

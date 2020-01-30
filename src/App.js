@@ -30,6 +30,9 @@ function App() {
 
   const getCity = cityId => {
     const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
+    if (list.includes(cityId)) {
+      console.log("Error");
+    }
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}`
@@ -42,10 +45,11 @@ function App() {
           temp: data.main.temp,
           feelsLike: data.main.feels_like,
           sunrise: data.sys.sunrise,
-          sunset: data.sys.sunset
+          sunset: data.sys.sunset,
+          cityId: cityId
         };
         const newList = [...list, newItem];
-        setList(newList)
+        setList(newList);
         console.log(list);
       });
   };

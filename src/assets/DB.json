@@ -33,19 +33,5 @@
       "sunset": 1580029006,
       "listId": 3
     }
-  ],
-  "list": [
-    {
-      "id": 1,
-      "name": "Cairns"
-    },
-    {
-      "id": 2,
-      "name": "Moscow"
-    },
-    {
-      "id": 3,
-      "name": "Novosibirsk"
-    }
   ]
 }
