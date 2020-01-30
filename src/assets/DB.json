@@ -32,6 +32,39 @@
       "sunrise": 1579982485,
       "sunset": 1580029006,
       "listId": 3
+    },
+    {
+      "name": "Minsk",
+      "timezone": 10800,
+      "windSpeed": 3,
+      "temp": 275.15,
+      "feelsLike": 271.21,
+      "sunrise": 1580364054,
+      "sunset": 1580395482,
+      "cityId": 625144,
+      "id": 4
+    },
+    {
+      "name": "Vite",
+      "timezone": 19800,
+      "windSpeed": 1.94,
+      "temp": 291.8,
+      "feelsLike": 289.49,
+      "sunrise": 1580434441,
+      "sunset": 1580475364,
+      "cityId": 1253091,
+      "id": 5
+    },
+    {
+      "name": "Mingatuy",
+      "timezone": 28800,
+      "windSpeed": 1.16,
+      "temp": 249.4,
+      "feelsLike": 244.87,
+      "sunrise": 1580432806,
+      "sunset": 1580464157,
+      "cityId": 2019963,
+      "id": 6
     }
   ]
 }

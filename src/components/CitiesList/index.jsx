@@ -3,15 +3,15 @@ import classNames from "classnames";
 
 import AddBtn from "../AddBtn";
 
-const CitiesList = ({ list, onClickItem, activeItem }) => {
+const CitiesList = ({ citiesList, onClickItem, activeItem }) => {
   return (
     <div className="sidebar__list cities-list">
       <ul className="cities-list__block">
-        {list.map(item => {
+        {citiesList.map(item => {
           return (
             <li
               onClick={() => onClickItem(item)}
-              key={item.id}
+              key={item.cityId}
               className={classNames("cities-list__item", {
                 "cities-list__item--active":
                   activeItem && item.id === activeItem.id

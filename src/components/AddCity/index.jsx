@@ -3,7 +3,7 @@ import Autosuggest from "react-autosuggest";
 
 import DB from "../../assets/city.list.min.json";
 
-const AddCity = ({ getCity }) => {
+const AddCity = ({ addCity }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -78,7 +78,7 @@ const AddCity = ({ getCity }) => {
           onSuggestionSelected={onSuggestionSelected}
         />
         <button
-          onClick={() => (selectedId ? getCity(selectedId) : false)}
+          onClick={() => (selectedId ? addCity(selectedId) : false)}
           className="add-city__btn"
         >
           Add

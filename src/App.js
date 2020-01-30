@@ -5,32 +5,21 @@ import { Route, useHistory } from "react-router-dom";
 import { Logo, CitiesList, City, AddCity } from "./components";
 
 function App() {
-  const [list, setList] = useState(null);
-  const [cities, setCities] = useState(null);
+  const [citiesList, setCitiesList] = useState(null);
   const [activeItem, setActiveItem] = useState(null);
 
   let history = useHistory();
 
-  useEffect(() => {
-    const listId = history.location.pathname.split("city/")[1];
-    if (list) {
-      const activeList = list.find(list => list.id === Number(listId));
-      setActiveItem(activeList);
-    }
-  }, [list, history.location.pathname]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/list/").then(({ data }) => {
-      setList(data);
-    });
     axios.get("http://localhost:3001/cities/").then(({ data }) => {
-      setCities(data);
+      setCitiesList(data);
     });
   }, []);
 
-  const getCity = cityId => {
+  const addCity = cityId => {
     const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
-    if (list.includes(cityId)) {
+    if (citiesList.includes(cityId)) {
       console.log("Error");
     }
     axios
@@ -48,23 +37,35 @@ function App() {
           sunset: data.sys.sunset,
           cityId: cityId
         };
-        const newList = [...list, newItem];
-        setList(newList);
-        console.log(list);
+        axios.post("http://localhost:3001/cities", newItem);
+        return newItem;
+      })
+      .then(newItem => {
+        const newList = [...citiesList, newItem];
+        setCitiesList(newList);
       });
-  };
-
-  return (
-    <div className="weather-app">
+    };
+    useEffect(() => {
+      const activeCityId = history.location.pathname.split("city/")[1];
+      if (citiesList) {
+        const activeCity = citiesList.find(
+          city => city.id === Number(activeCityId)
+        );
+        setActiveItem(activeCity);
+      }
+    }, [citiesList, history.location.pathname]);
+console.log(citiesList);
+    return (
+      <div className="weather-app">
       <div className="weather-app__sidebar sidebar">
         <Logo />
-        {list && (
+        {citiesList && (
           <CitiesList
             activeItem={activeItem}
-            onClickItem={list => {
-              history.push(`/city/${list.id}`);
+            onClickItem={citiesList => {
+              history.push(`/city/${citiesList.id}`);
             }}
-            list={list.map(item => {
+            citiesList={citiesList.map(item => {
               return {
                 id: item.id,
                 name: item.name,
@@ -76,9 +77,11 @@ function App() {
       </div>
       <div className="weather-app__main city">
         <Route exact path="/">
-          <AddCity getCity={getCity} />
+          <AddCity addCity={addCity} />
         </Route>
-        <Route path="/city/">{cities && <City cities={cities} />}</Route>
+        <Route path="/city/">
+          {citiesList && <City cities={citiesList} />}
+        </Route>
       </div>
     </div>
   );
