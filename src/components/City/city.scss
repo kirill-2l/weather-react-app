@@ -18,9 +18,21 @@
     color: $orange;
     margin-bottom: 30px;
   }
+  &__text {
+    &-block {
+      font-weight: 100;
+      margin-bottom: 10px;
+    }
+    &-title {
+      font-size: 32px;
+    }
+    &-descr {
+      font-size: 22px;
+    }
+  }
   &__time {
-    font-size: 28px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 600;
     color: $blue;
     margin-bottom: 30px;
   }
@@ -33,7 +45,7 @@
       &:not(last-child) {
         margin-right: 80px;
       }
-      width: 220px;
+      width: 270px;
     }
     &-item {
       display: flex;
@@ -42,6 +54,7 @@
       font-size: 28px;
       color: #000;
       font-weight: 300;
+      &:not(:last-child) {margin-bottom: 5px;}
     }
   }
   &__prop-value {

@@ -10,7 +10,6 @@ function App() {
 
   let history = useHistory();
 
-
   useEffect(() => {
     axios.get("http://localhost:3001/cities/").then(({ data }) => {
       setCitiesList(data);
@@ -19,14 +18,16 @@ function App() {
 
   const addCity = cityId => {
     const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
-    if (citiesList.includes(cityId)) {
-      console.log("Error");
+    if (citiesList.find(item => item.cityId === cityId)) {
+      alert("This city has been already added to cities list");
+      return;
     }
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}`
       )
       .then(({ data }) => {
+        console.log(data);
         const newItem = {
           name: data.name,
           timezone: data.timezone,
@@ -35,7 +36,10 @@ function App() {
           feelsLike: data.main.feels_like,
           sunrise: data.sys.sunrise,
           sunset: data.sys.sunset,
-          cityId: cityId
+          title:data.weather[0].main,
+          description:data.weather[0].description,
+          icon: data.weather[0].icon,
+          cityId: data.id
         };
         axios.post("http://localhost:3001/cities", newItem);
         return newItem;
@@ -43,33 +47,36 @@ function App() {
       .then(newItem => {
         const newList = [...citiesList, newItem];
         setCitiesList(newList);
-      });
-    };
-    useEffect(() => {
-      const activeCityId = history.location.pathname.split("city/")[1];
-      if (citiesList) {
-        const activeCity = citiesList.find(
-          city => city.id === Number(activeCityId)
-        );
-        setActiveItem(activeCity);
-      }
-    }, [citiesList, history.location.pathname]);
-console.log(citiesList);
-    return (
-      <div className="weather-app">
+      })
+      .catch(e => alert(e))
+      .finally(() => console.log("complete"));
+  };
+
+  useEffect(() => {
+    const activeCityId = history.location.pathname.split("city/")[1];
+    if (citiesList) {
+      const activeCity = citiesList.find(
+        city => city.cityId === Number(activeCityId)
+      );
+      setActiveItem(activeCity);
+    }
+  }, [citiesList, history.location.pathname]);
+
+  return (
+    <div className="weather-app">
       <div className="weather-app__sidebar sidebar">
         <Logo />
         {citiesList && (
           <CitiesList
             activeItem={activeItem}
             onClickItem={citiesList => {
-              history.push(`/city/${citiesList.id}`);
+              history.push(`/city/${citiesList.cityId}`);
             }}
             citiesList={citiesList.map(item => {
               return {
-                id: item.id,
+                cityId: item.cityId,
                 name: item.name,
-                activeItem: Number(item.id) === activeItem ? true : false
+                activeItem: Number(item.cityId) === activeItem ? true : false
               };
             })}
           />

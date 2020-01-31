@@ -14,7 +14,7 @@ const CitiesList = ({ citiesList, onClickItem, activeItem }) => {
               key={item.cityId}
               className={classNames("cities-list__item", {
                 "cities-list__item--active":
-                  activeItem && item.id === activeItem.id
+                  activeItem && item.cityId === activeItem.cityId
               })}
             >
               {item.name}
