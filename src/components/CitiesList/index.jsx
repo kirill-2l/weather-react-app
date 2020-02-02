@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 import AddBtn from "../AddBtn";
 
@@ -22,7 +23,9 @@ const CitiesList = ({ citiesList, onClickItem, activeItem }) => {
           );
         })}
       </ul>
+      <Link to="/">
       <AddBtn />
+      </Link>
     </div>
   );
 };

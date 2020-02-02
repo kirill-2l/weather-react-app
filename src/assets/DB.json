@@ -1,17 +1,17 @@
 {
   "cities": [
     {
-      "name": "New York",
-      "timezone": -18000,
-      "windSpeed": 3.1,
-      "temp": 268.88,
-      "feelsLike": 263.71,
-      "sunrise": 1580473117,
-      "sunset": 1580508720,
-      "title": "Clouds",
-      "description": "overcast clouds",
-      "icon": "04d",
-      "cityId": 5128638,
+      "name": "Moscow",
+      "timezone": 10800,
+      "windSpeed": 4,
+      "temp": 273.82,
+      "feelsLike": 269.13,
+      "sunrise": 1580620976,
+      "sunset": 1580652195,
+      "title": "Snow",
+      "description": "light rain and snow",
+      "cityId": 524901,
+      "photo": "https://images.unsplash.com/photo-1567449394808-405b4fac58e7?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjExMjQwMn0",
       "id": 1
     }
   ]

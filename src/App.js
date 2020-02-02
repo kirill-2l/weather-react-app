@@ -16,42 +16,53 @@ function App() {
     });
   }, []);
 
-  const addCity = cityId => {
+  const getWeather = async cityId => {
     const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
+    try {
+      let res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}`
+      );
+      console.log(res);
+      return res.data;
+    } catch (e) {}
+  };
+  const getPhoto = async cityName => {
+    const apiKey =
+      "b5cfa9a93266cdd8a6ea18e70aa719f9528a09f66a96b8a45bf2d90342c42ea2";
+    try {
+      let res = await axios.get(
+        `https://api.unsplash.com/search/photos/?client_id=${apiKey}&query=${cityName} building&orientation=landscape`
+      );
+      return res.data.results;
+    } catch (e) {}
+  };
+
+  const addCity = async cityId => {
     if (citiesList.find(item => item.cityId === cityId)) {
       alert("This city has been already added to cities list");
       return;
     }
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}`
-      )
-      .then(({ data }) => {
-        console.log(data);
-        const newItem = {
-          name: data.name,
-          timezone: data.timezone,
-          windSpeed: data.wind.speed,
-          temp: data.main.temp,
-          feelsLike: data.main.feels_like,
-          sunrise: data.sys.sunrise,
-          sunset: data.sys.sunset,
-          title:data.weather[0].main,
-          description:data.weather[0].description,
-          icon: data.weather[0].icon,
-          cityId: data.id
-        };
-        axios.post("http://localhost:3001/cities", newItem);
-        return newItem;
-      })
-      .then(newItem => {
-        const newList = [...citiesList, newItem];
-        setCitiesList(newList);
-      })
-      .catch(e => alert(e))
-      .finally(() => console.log("complete"));
+    let weather = await getWeather(cityId);
+    let photo = await getPhoto(weather.name);
+    const newItem = {
+      name: weather.name,
+      timezone: weather.timezone,
+      windSpeed: weather.wind.speed,
+      temp: weather.main.temp,
+      feelsLike: weather.main.feels_like,
+      sunrise: weather.sys.sunrise,
+      sunset: weather.sys.sunset,
+      title: weather.weather[0].main,
+      description: weather.weather[0].description,
+      cityId: weather.id,
+      photo: photo[Math.ceil(Math.random() * 5)].urls.full
+    };
+    if (newItem) {
+      axios.post("http://localhost:3001/cities", newItem);
+      const newList = [...citiesList, newItem];
+      setCitiesList(newList);
+    }
   };
-
   useEffect(() => {
     const activeCityId = history.location.pathname.split("city/")[1];
     if (citiesList) {

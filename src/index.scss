@@ -36,6 +36,9 @@ $orange: #e25f00;
     background-color: #fff4e9;
     box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.02);
     padding: 30px;
+    position: sticky;
+    // overflow: hidden;
+    max-height: 100%;
   }
 }
 
