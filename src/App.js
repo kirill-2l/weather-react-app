@@ -10,11 +10,11 @@ function App() {
 
   let history = useHistory();
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/cities/").then(({ data }) => {
-      setCitiesList(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:3001/cities/").then(({ data }) => {
+  //     setCitiesList(data);
+  //   });
+  // }, []);
 
   const getWeather = async cityId => {
     const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
@@ -22,9 +22,10 @@ function App() {
       let res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}`
       );
-      console.log(res);
       return res.data;
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
   const getPhoto = async cityName => {
     const apiKey =
@@ -33,12 +34,15 @@ function App() {
       let res = await axios.get(
         `https://api.unsplash.com/search/photos/?client_id=${apiKey}&query=${cityName} building&orientation=landscape`
       );
+      console.log(res.data);
       return res.data.results;
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const addCity = async cityId => {
-    if (citiesList.find(item => item.cityId === cityId)) {
+    if (citiesList && citiesList.find(item => item.cityId === cityId)) {
       alert("This city has been already added to cities list");
       return;
     }
@@ -55,11 +59,10 @@ function App() {
       title: weather.weather[0].main,
       description: weather.weather[0].description,
       cityId: weather.id,
-      photo: photo[Math.ceil(Math.random() * 5)].urls.full
+      photo: photo[Math.ceil(Math.random() * 5)].urls.regular
     };
     if (newItem) {
-      axios.post("http://localhost:3001/cities", newItem);
-      const newList = [...citiesList, newItem];
+      const newList = citiesList ? [...citiesList, newItem] : [newItem];
       setCitiesList(newList);
     }
   };
