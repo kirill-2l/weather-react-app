@@ -22,7 +22,7 @@ const City = ({ cities }) => {
     <Fragment>
       {cities.map(city => {
         return (
-          <Route key={city.cityId} path={`/city/${city.cityId}`}>
+          <Route key={city.cityId} path={`/weather-react-app/city/${city.cityId}`}>
             <CityHeader photo={city.photo} />
             <div className="city__content">
               <div className="city__header">

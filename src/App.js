@@ -78,7 +78,7 @@ function App() {
           <CitiesList
             activeItem={activeItem}
             onClickItem={citiesList => {
-              history.push(`/city/${citiesList.cityId}`);
+              history.push(`/weather-react-app/city/${citiesList.cityId}`);
             }}
             citiesList={citiesList.map(item => {
               return {
@@ -91,14 +91,14 @@ function App() {
         )}
       </div>
       <div className="weather-app__main city">
-        <Route exact path="/">
+        <Route exact path="/weather-react-app/">
           <AddCity addCity={addCity} />
         </Route>
-        <Route path="/city/">
+        <Route path="/weather-react-app/city/">
           {!citiesList && (
             <Redirect
               to={{
-                pathname: "/"
+                pathname: "/weather-react-app/"
               }}
             />
           )}

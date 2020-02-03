@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Logo = () => {
   return (
     <div className="sidebar__logo logo">
-      <Link to="/">
+      <Link to="/weather-react-app/">
         <span className="logo__first-letter">W</span>
         <span className="logo__first-txt">heatherApp</span>
       </Link>

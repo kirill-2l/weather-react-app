@@ -23,7 +23,7 @@ const CitiesList = ({ citiesList, onClickItem, activeItem }) => {
           );
         })}
       </ul>
-      <Link to="/">
+      <Link to="/weather-react-app/">
       <AddBtn />
       </Link>
     </div>
