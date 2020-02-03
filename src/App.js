@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Route, useHistory } from "react-router-dom";
+import { Route, useHistory, Redirect } from "react-router-dom";
 
 import { Logo, CitiesList, City, AddCity } from "./components";
 
@@ -9,12 +9,6 @@ function App() {
   const [activeItem, setActiveItem] = useState(null);
 
   let history = useHistory();
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:3001/cities/").then(({ data }) => {
-  //     setCitiesList(data);
-  //   });
-  // }, []);
 
   const getWeather = async cityId => {
     const apiKey = "e9f4e35f4de8fa1f2f0a9fb7e73e642c";
@@ -101,6 +95,13 @@ function App() {
           <AddCity addCity={addCity} />
         </Route>
         <Route path="/city/">
+          {!citiesList && (
+            <Redirect
+              to={{
+                pathname: "/"
+              }}
+            />
+          )}
           {citiesList && <City cities={citiesList} />}
         </Route>
       </div>
